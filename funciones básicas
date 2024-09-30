@@ -1,0 +1,70 @@
+//MERGE
+function merge (first:any, second:any){
+    return first+second;
+}
+
+console.log(merge(1,2))
+//MERGE2
+function merge2(valor1:string | number,valor2:string | number){
+    
+    if(typeof valor1==="number" && typeof valor2==="number")
+    return valor1+valor2;
+throw new Error("Dato no permitido");
+}
+
+enum errores {ERROR_CONEXION_INTERNET=101, ERROR_ACCESO_BD=102}
+console.log(merge2(1,2));
+
+//
+function procesar (browser: "Internet Explorer" | "Mozilla" | "Chrome") {
+
+}
+procesar("Mozilla");
+//
+function procesarNumerico(numero: 1 | 2 | 3){
+    return console.log('si');
+}
+procesarNumerico(3);
+
+/** Definir una función para calcular el área de un triángulo, tenemos que utilizar una enumeración para pasarle los valores iniciales de la base y de la altura del triángulo 
+ * y también vamos a utilizar un puntero a función para mostrar el resultado por la consola.**/
+
+
+
+enum valores {BASE = 6, ALTURA = 9}
+function calcularAreaTriangulo (base: number, altura: number){
+    return (base*altura/2)
+}
+
+let imprimir = calcularAreaTriangulo;
+
+
+console.log(imprimir (valores.BASE,valores.ALTURA));
+
+/**Ahora hacer el mismo ejercicio pero en vez de utilizar una enumeración, utilizar un array de datos. **/
+
+let array1: [ number,number] = [4,12];
+function calcularAreaTriangulo2 (base: number, altura: number) {
+    return (base*altura/2)
+}
+let imprimir2 = calcularAreaTriangulo2;
+console.log(imprimir2(array1[0],array1[1]));
+/**Vamos a definir una función que reciba como parámetros 2 valores que van a ser de tipo “literal”, la función se llamará “calculoAlumno”, 
+el primer parámetro será “color_pelo” y podrá tomar solo valores “negro” y “rubio” y el segundo parámetro será “edad” que solo podrá tomar valores entre 14 y 16 años incluidos. 
+Se debe asignar un puntero a función para probar la misma. La función devolverá:
+Color de pelo:  {color_pelo} y edad:  {edad}.
+(*) Hacer el mismo ejercicio pero pasando l... de Fernando Gallego Valenzuela
+Fernando Gallego Valenzuela
+17:47
+(*) Hacer el mismo ejercicio pero pasando los datos desde un array de tipo any:**/
+
+type colorPelo = "negro" | "rubio";
+type edad = 14 | 15 | 16;
+
+function calculoAlumno (color_pelo : colorPelo, edadAlumno : edad) {
+    console.log("El color de pelo es: " + color_pelo + " y la edad es: " + edadAlumno + " Años.");
+
+}
+let alumno = calculoAlumno;
+
+(alumno("rubio", 15));

@@ -1,0 +1,25 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color = "dark">
+    <ion-button slot="start" color="dark">
+      <ion-back-button defaultHref="/home" color="light"></ion-back-button>
+    </ion-button>
+    <ion-title class="ion-text-center" >Restaurantes</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="fondo">
+
+    <ion-list  color="light">
+      <ion-item *ngFor="let restaurante of restaurante" color="light" [routerLink]="['/restaurante', restaurante.id]">
+        <ion-avatar slot="start">
+          <ion-img [src]="restaurante.logotipo"></ion-img>
+        </ion-avatar>
+        <ion-label>
+          {{restaurante.nombre}}
+        </ion-label>
+      </ion-item>
+
+    </ion-list>
+  </div>
+</ion-content>

@@ -1,0 +1,32 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <!-- cuidado con la ruta ../ pa salir de la carpeta-->
+    <ion-img src="../../../assets/images/iconoTiempo.jpg" style="width:200px;height:200px"></ion-img>
+    <div class="titulo"> {{"TIME_PAGE.TITLE" | translate}}</div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-row class="textos">
+    <ion-col>
+      <ion-label class="texto-login">
+        {{"TIME_PAGE.LATITUDE_PLACEHOLDER" | translate}}
+      </ion-label>
+      <!-- ngmodel para guardar lo escrito en una variable--> 
+      <ion-input type="text" placeholder="{{'TIME_PAGE.LATITUDE_PLACEHOLDER' | translate}}" [(ngModel)]="latitud"></ion-input>
+    </ion-col>
+    <ion-col>
+      <ion-label class="texto-login">
+        {{"TIME_PAGE.LONGITUDE_PLACEHOLDER" | translate}}
+      </ion-label>
+      <ion-input type="text" placeholder="{{'TIME_PAGE.LONGITUDE_PLACEHOLDER' | translate}}" [(ngModel)]="longitud"></ion-input>
+    </ion-col>
+  </ion-row>
+  <ion-button class="boton" ion-button (click)="get_weather()">
+    <ion-icon name="log-in"></ion-icon>
+    {{"TIME_PAGE.GET_WEATHER" | translate}}
+  </ion-button>
+  <hr>
+  <!-- llamamos al componente paint, al input tiempo-->
+  <app-paint [tiempo]="time_send"></app-paint>
+</ion-content>

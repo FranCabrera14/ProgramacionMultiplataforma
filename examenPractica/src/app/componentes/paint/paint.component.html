@@ -1,0 +1,27 @@
+<ion-content>
+  <!-- si el tiempo.nombre tiene algo se imprime, si no, (!) , aparece vacio-->
+  <div class="textos" *ngIf="tiempo.nombre!=''">
+    <ion-grid>
+      <ion-row class="titulo">
+        {{"PAINT_PAGE.TITLE" | translate }} {{tiempo.nombre}}
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          {{"PAINT_PAGE.TEMP_MIN" | translate }} {{tiempo.temp_min}}
+        </ion-col>
+        <ion-col>
+          {{"PAINT_PAGE.TEMP_MAX" | translate }} {{tiempo.temp_max}}
+        </ion-col>
+        <ion-col>
+          {{"PAINT_PAGE.HUMIDITY" | translate }} {{tiempo.humedad}}
+        </ion-col>
+        <ion-col>
+          {{"PAINT_PAGE.WIND" | translate }} {{tiempo.velocidad}}
+        </ion-col>
+        </ion-row>
+        <ion-row class="titulo">
+          <ion-img style="width:150px;height:150px;" [src]="get_icono()"></ion-img>
+        </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

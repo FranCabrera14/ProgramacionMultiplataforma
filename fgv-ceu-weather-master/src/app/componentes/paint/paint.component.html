@@ -1,0 +1,37 @@
+<ion-content class="ion-padding">
+  <div *ngIf="forecast" class="container">
+    <ion-row class="titulo">
+      {{"WEATHER_RESULTS.TITLE"| translate}} {{forecast!.name!}}
+    </ion-row>
+    <div class="textos">
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            {{"WEATHER_RESULTS.WIND" | translate}} {{forecast!.wind!.speed}} m/s
+          </ion-col>
+          <ion-col>
+            {{"WEATHER_RESULTS.HUMIDITY" | translate}} {{forecast!.main!.humidity}} %
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+    <ion-row class="titulo">
+      {{"WEATHER_RESULTS.TEMPERATURE"| translate}}
+    </ion-row>
+    <div class="textos">
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            {{"WEATHER_RESULTS.TEMP_MIN" | translate}} {{forecast!.main!.temp_min}} ºC
+          </ion-col>
+          <ion-col>
+            {{"WEATHER_RESULTS.TEMP_MAX" | translate}} {{forecast!.main!.temp_max}} ºC
+          </ion-col>
+        </ion-row>
+        <ion-row class="image-container">
+          <ion-img class="weather-icon" [src]="getIcon()"></ion-img>
+        </ion-row>
+      </ion-grid>
+    </div>
+  </div>
+</ion-content>

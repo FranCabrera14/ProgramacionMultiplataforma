@@ -6,7 +6,7 @@ export class Game extends Phaser.Scene {
  
     
  
-    // imágenes del personaje y  frutas.
+    // imágenes del personaje, frutas background y audios
     preload() {
     this.load.image('jugador', './assets/images/jugador.png');
     this.load.image('pera', './assets/images/pera.png');
@@ -15,8 +15,11 @@ export class Game extends Phaser.Scene {
     this.load.image('mina', './assets/images/mina .png')
     this.load.image('background', './assets/images/playita.jpg')
     this.load.audio('musica', './assets/audios/musiquita.mp3');
+    this.load.audio('mordisco','./assets/audios/mordisquito.mp3')
+    this.load.audio('gameover', './assets/audios/gameover.mp3')
+    this.load.audio('victory','./assets/audios/victory.mp3')
     }
-    //donde creo elementos del juego, incluyendo el jugador, las frutas y la puntuación.
+    //donde creo elementos del juego, incluyendo el jugador, las frutas, la musica y demás
     create() {
     
       this.music = this.sound.add(
@@ -24,7 +27,11 @@ export class Game extends Phaser.Scene {
         {loop: true},
 
       )
+      this.victory = this.sound.add('victory')
+      this.gameover = this.sound.add('gameover')
+      this.mordisco = this.sound.add('mordisco')
       this.music.play();
+        //las imagenes me venian como un radio muy grande y algunas las tuve que corregir creando esta constante para hacerle luego un setCircle()
         const radioMina = 80;
         const radioPera = 25;
         const background = this.add.image(400,300, 'background').setScale(1);
@@ -35,27 +42,38 @@ export class Game extends Phaser.Scene {
         this.background = 'background';
       
         this.fruits = this.physics.add.group();
-
+        //overlap es para que cuando toque el jugador una fruta llame a la funcion collectFruit
         this.physics.add.overlap(this.player, this.fruits, this.collectFruit, null, this);
-        //en esta lista añado las frutas que quiero que aparezcan
-        const crearFrutas = (tipo, cantidad, velocidadMin, velocidadMax, puntos) => {
-            for (let i = 0; i < cantidad; i++) {
-                let fruta = this.fruits.create(Phaser.Math.Between(50, 750), Phaser.Math.Between(-200, 0), tipo);
-                fruta.setVelocity(0, Phaser.Math.Between(velocidadMin, velocidadMax));
-                fruta.setData('points', puntos);
-                if (tipo === 'pera'){
-                    fruta.setCircle(radioPera,radioPera/1)
-                }else if (tipo === 'mina'){
-                    fruta.setCircle(radioMina, radioMina/1,radioMina/3)
-                }
-            }
+               //en esta lista añado las frutas que quiero que aparezcan
+        //metodo crearFrutas donde creo las frutas con delay porque me dio muchos problemas creandome demasiadas a la vez,donde les cambio el radio
+        //doy velocidad puntos y hago que aparezcan de forma aleatoria y arriba
+        const crearFrutas = (tipo,velocidadMin, velocidadMax, puntos) => {
+            this.time.addEvent({
+                delay: 2000,
+                callback: () => {
+                    let fruta = this.fruits.create(
+                        Phaser.Math.Between(50, 750),
+                        -50, 
+                        tipo 
+                    );
+                    if (tipo === 'pera'){
+                        fruta.setCircle(radioPera,radioPera/1)
+                    }else if (tipo === 'mina'){
+                        fruta.setCircle(radioMina, radioMina/1,radioMina/3)
+                    }
+                    fruta.setVelocityY(Phaser.Math.Between(velocidadMin, velocidadMax)); 
+                    fruta.setData('points', puntos); 
+                },
+                loop: true // Hace que se repita infinitamente
+            });
         };
-        
-        // Crear diferentes tipos de frutas con cantidades y velocidades distintas
-        crearFrutas('naranja', 5, 30, 80, 10);  // 5 naranjas con velocidad 30-80
-        crearFrutas('platano', 3, 50, 150, 20); // 3 plátanos con velocidad 50-150
-        crearFrutas('pera', 2, 120, 200, 30);   // 2 peras con velocidad 120-200
-        crearFrutas('mina', 1, 30, 80, 10)
+
+    
+    
+        crearFrutas('naranja', 60, 90, 10);
+        crearFrutas('platano', 120, 175, 20); 
+        crearFrutas('pera', 175, 250, 30);   
+        crearFrutas('mina', 60, 90, 10)
         this.cursors = this.input.keyboard.createCursorKeys();
         this.scoreText = this.add.text(10, 10, 'Score: ', { fontSize: '20px', fill: '#fff' });
         this.score = 0;
@@ -76,36 +94,51 @@ export class Game extends Phaser.Scene {
     
     // cuando se recoge una fruta, aumenta la puntuación y reposiciona la fruta
     collectFruit(player, fruit) {
+        
         if(fruit.texture.key === 'mina'){
             this.gameOver();
         }
+        this.mordisco.play();
         fruit.setY(0);
         fruit.setX(Phaser.Math.Between(50, 750));
         this.score += fruit.getData('points');
         this.scoreText.setText('Score: ' + this.score);
        
        
-        // Cambiar el tamaño del jugador de manera uniforme cada 250 puntos
-        if (this.score >= 250 && this.score < 500) {
+        //hago que crezca el jugador y si llega a 1000 gana
+        if (this.score >= 250 && this.score < 500) {     
             player.setScale(1.5);
         } else if (this.score >= 500 && this.score < 750) {
-            player.setScale(2);        
+            player.setScale(2.5);        
         } else if (this.score >= 750 && this.score < 1000) {
-            player.setScale(2.5);   
+            player.setScale(3);   
         } else if (this.score >= 1000) 
             this.win()
     }
 
     gameOver() {
-        this.physics.pause(); // Detiene el movimiento del juego
-        this.player.setTint(0xff0000); // Cambia el color del jugador a rojo
-        this.add.text(300, 250, 'GAME OVER', { fontSize: '50px', fill: '#ff0000' }).setOrigin(0.5);
+        this.music.stop();
+        this.gameover.play();
+        this.physics.pause();
+        this.player.setTint(0xff0000); 
+        this.add.text(
+            this.cameras.main.centerX, 
+            this.cameras.main.centerY,
+            'HAS PERDIDO', 
+            { fontSize: '50px', fill: '#ff0000', fontFamily: 'Arial' }
+        ).setOrigin(0.5);
     }
 
     win(){
-        this.physics.pause(); // Detiene el movimiento del juego
-        this.player.setTint(0xff0000); // Cambia el color del jugador a rojo
-        this.add.text(300, 250, 'HAS GANADO!!!', { fontSize: '50px', fill: '#00ff00' }).setOrigin(0.5);  
+        this.music.stop();
+        this.victory.play();
+        this.physics.pause();
+        this.player.setTint(0x00ff00); 
+        this.add.text(this.cameras.main.centerX, 
+                    this.cameras.main.centerY, 
+                    'HAS GANADO!!!', 
+                    { fontSize: '50px', fill: '#00ff00', fontFamily: 'Arial' }
+                ).setOrigin(0.5);  
     }
 
     

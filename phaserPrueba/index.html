@@ -6,8 +6,21 @@
     <title>Frutería Paco</title>
 </head>
 <body>
-    <body style="background-image: '../images/background';">
-        <h1>Frutería Paco</h1>
+    <body>
+        <style>
+            body {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                margin: 0;
+                background-color: #87CEEB; /* Fondo celeste */
+            }
+            canvas {
+                display: block;
+            }
+        </style>
+        
         <script src="//cdn.jsdelivr.net/npm/phaser@3.24.0/dist/phaser.js"></script>
         <script type="module" src="index.js"></script>
     </body>

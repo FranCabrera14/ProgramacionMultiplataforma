@@ -1,0 +1,20 @@
+{
+    "WEATHER_PAGE": {
+        "TITLE": "The weather in your area!",
+        "LATITUDE_PLACEHOLDER": "Latitude",
+        "LONGITUDE_PLACEHOLDER": "Longitude",
+        "GET_WEATHER": "Get the forecast",
+        "ERROR_TITLE": "Error with the fields",
+        "ERROR_MESSAGE": "Please, enter a valid latitude and longitude",
+        "ERROR_FETCH": "Error fetching the forecast",
+        "ERROR_FETCH_MESSAGE": "There was an error with the server"
+    },
+    "WEATHER_RESULTS": {
+        "TITLE": "The weather in ",
+        "TEMPERATURE": "Temperatures",
+        "TEMP_MIN": "Minimum temperature of",
+        "TEMP_MAX": "Maximum temperature of",
+        "HUMIDITY": "Humidity of",
+        "WIND": "Wind-speed of"
+    }
+}

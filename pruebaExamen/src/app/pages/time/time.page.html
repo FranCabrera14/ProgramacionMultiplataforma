@@ -1,0 +1,31 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-img src="./assets/imagenes/logotipo.png" style="width:200px;height:200px"></ion-img>
+    <div class="titulo"> {{titulo}}</div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-row class="textos">
+    <ion-col>
+      <ion-label class="texto-login">
+        {{tlatitud}}
+      </ion-label>
+      <!-- ngmodel para guardar lo escrito en una variable--> 
+      <ion-input type="text" placeholder="latitud" [(ngModel)]="latitud"></ion-input>
+    </ion-col>
+    <ion-col>
+      <ion-label class="texto-login">
+        {{tlongitud}}
+      </ion-label>
+      <ion-input type="text" placeholder="longitud" [(ngModel)]="longitud"></ion-input>
+    </ion-col>
+  </ion-row>
+  <ion-button class="boton" ion-button (click)="get_weather()">
+    <ion-icon name="log-in"></ion-icon>
+    {{enviar}}
+  </ion-button>
+  <hr>
+  <!-- llamamos al componente paint, al input tiempo-->
+  <app-paint [tiempo]="time_send"></app-paint>
+</ion-content>

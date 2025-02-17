@@ -1,0 +1,20 @@
+{
+    "WEATHER_PAGE": {
+        "TITLE": "¡El tiempo en tu zona!",
+        "LATITUDE_PLACEHOLDER": "Latitud",
+        "LONGITUDE_PLACEHOLDER": "Longitud",
+        "GET_WEATHER": "Obtener el tiempo",
+        "ERROR_TITLE": "Error en los campos",
+        "ERROR_MESSAGE": "Por favor, introduce una latitud y longitud válidas",
+        "ERROR_FETCH": "Error obteniendo la previsión",
+        "ERROR_FETCH_MESSAGE": "Hubo un error con el servidor"
+    },
+    "WEATHER_RESULTS": {
+        "TITLE": "El tiempo en ",
+        "TEMPERATURE": "Temperaturas",
+        "TEMP_MIN": "Temperatura mínima de",
+        "TEMP_MAX": "Temperatura máxima de",
+        "HUMIDITY": "Humedad del ",
+        "WIND": "Viento de"
+    }
+}

@@ -1,0 +1,79 @@
+/* Center the button */
+ion-item ion-button {
+    display: block;
+    margin: 0 auto;
+    background-color: rgb(111, 168, 233);
+    /* Center the button horizontally */
+}
+
+ion-content {
+    --background: url('https://blogger.googleusercontent.com/img/a/AVvXsEiCvgN6CRbP_MfIcUNH8eO9cyJJpUCgmMy9vyLrJ_wz78GBFy5ejZN5TNeeSVUaa10mlryE-qtkSuo31U4KGtYdZyl23zrAHeCWDYRd8LhP5lHa5HQ8AYrIPDypcB5FF4eWEaKkqu26SeASOTgRZDv3SqSSIk-92O39NU_pfP77B2XmoDO3ifPugEfhK1hL=s16000-rw') no-repeat center center / cover;
+
+}
+
+/* Add space between the label and the input */
+ion-item ion-label {
+    min-width: 120px;
+    /* Set a fixed width for the label */
+    margin-right: 16px;
+    /* Add space between the label and the input */
+}
+
+/* Ensure the input takes up the remaining space */
+ion-item ion-input {
+    flex: 1;
+    /* Allow the input to grow and fill the space */
+}
+
+app-paint {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    z-index: 10;
+    height: 100%;
+    --ion-background-color: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(10px);
+}
+
+
+/* Center the toolbar title */
+ion-toolbar {
+    display: flex;
+    justify-content: center;
+    /* Center horizontally */
+    align-items: center;
+    /* Center vertically */
+}
+
+/* Style the toolbar title with a drop shadow */
+ion-toolbar ion-title {
+    text-shadow: 2px 2px 4px rgb(111, 168, 233);
+    /* Drop shadow effect */
+    font-size: 1.5rem;
+    /* Slightly larger font size */
+    /* Bold text */
+    letter-spacing: 1px;
+    /* Add some letter spacing */
+}
+
+/* Ensure the title takes full width for centering */
+ion-title {
+    text-align: center;
+    width: 100%;
+}
+
+/* Container for the form */
+.form-container {
+    max-width: 1000px;
+    /* Adjust this value as needed */
+    margin: 0 auto;
+    /* Center the container horizontally */
+    padding: 16px;
+    /* Add some padding inside the container */
+}
+
+/* Ensure the ion-list takes up the full width of the container */
+.form-container ion-list {
+    width: 100%;
+}

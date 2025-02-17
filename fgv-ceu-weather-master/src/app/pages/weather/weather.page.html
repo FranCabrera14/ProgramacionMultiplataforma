@@ -1,0 +1,33 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>{{"WEATHER_PAGE.TITLE" | translate}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <div class="form-container">
+    <ion-list>
+      <ion-item>
+        <ion-label>
+          {{"WEATHER_PAGE.LATITUDE_PLACEHOLDER" | translate}}
+        </ion-label>
+        <ion-input type="text" placeholder="{{'WEATHER_PAGE.LATITUDE_PLACEHOLDER' | translate}}"
+          [(ngModel)]="latitud"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>
+          {{"WEATHER_PAGE.LONGITUDE_PLACEHOLDER" | translate}}
+        </ion-label>
+        <ion-input type="text" placeholder="{{'WEATHER_PAGE.LONGITUDE_PLACEHOLDER' | translate}}"
+          [(ngModel)]="longitud"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-button (click)="getWeather(latitud, longitud)">
+          {{"WEATHER_PAGE.GET_WEATHER" | translate}}
+        </ion-button>
+      </ion-item>
+    </ion-list>
+  </div>
+  <app-paint [forecast]="forecast!" *ngIf="forecast"></app-paint>
+</ion-content>
